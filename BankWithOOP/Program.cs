@@ -6,13 +6,22 @@ namespace BankWithOOP
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("Welcome To The Bank of Elvis");
+            Console.WriteLine("-----------------------------------");
             // Here we are using the BankAccount class to create an account and perform some operations on it.
 
             var account = new BankAccount(0);   // create a new account object with an initial balance of 0
             account.Deposit(1000);              // add 100 (now balance is 1000)
             account.Withdraw(300);              // take out 30 (now balance is 700)
             Console.WriteLine(account.GetBalance()); // prints 700
+
+            // Here we are demonstrating the use of the Transaction interface and its implementations that I have done with my blood,sweat and tears
+            // (DepositTransaction and WithdrawTransaction) but I only did Deposit because you get the idea.
+
+            ITransaction deposit = new DepositTransaction(account, 500); // create a deposit transaction to add 500 to the account
+            deposit.Execute(); // execute the deposit transaction
+            Console.WriteLine(account.GetBalance()); // prints 1200 (700 + 500)
+
             Console.WriteLine("This is your BankAccount money!");
             Console.WriteLine("-----------------------------------");
             
@@ -21,6 +30,7 @@ namespace BankWithOOP
             var savings = new SavingsAccount(200000m, 0.02m); //I set my initial balance to 200000 and my interest rate to 2% because well its realistic. And (m) stands for decimal literal.
             savings.AddInterest(); // This method adds interest to the balance based on the interest rate we set when we created the object also because in a real savings account you get interest on your money.
             Console.WriteLine(savings.GetBalance()); // 204000 is the number we should get here.
+
             Console.WriteLine("This is your SavingsAccount money!");
             Console.WriteLine("-----------------------------------");
 
@@ -28,11 +38,10 @@ namespace BankWithOOP
             checking.DeductMonthlyFee();// fee of 15 is taken because of the method we created in the CheckingAccount class and having the account costs money.
             checking.Withdraw(600); // This should be allowed because of the overdraft limit of -500 we set in the CheckingAccount class.
             Console.WriteLine(checking.GetBalance()); // prints 85 because of the fee.
+
             Console.WriteLine("This is your CheckingAccount money!");
             Console.WriteLine("-----------------------------------");
             Console.ReadLine(); // This is to keep the console window open until we press a key.
-
-
         }
     }
 }
