@@ -27,7 +27,7 @@ namespace BankWithOOP.Classes
                 balance -= amount;
         }
 
-        public decimal GetBalance()
+        public decimal GetBalance() // Method to get the current balance of the account.
         {
             return balance;
         }
