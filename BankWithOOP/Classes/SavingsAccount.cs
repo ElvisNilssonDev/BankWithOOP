@@ -23,22 +23,19 @@ namespace BankWithOOP.Classes
         {
             Deposit(GetBalance() * interestRate); // add interest to the balance
         }
-    }
 
-    public class CheckingAccount : BankAccount
-    {
-        private decimal fee = 15.00m; // monthly fee for checking account and m is for decimal literal wich is more accurate for money calculations.
-        // You can change the fee to whatever you want just put a (.) before or after to change the outcome 1.0 is 100% so do what you want with that in mind.
-
-        public CheckingAccount(decimal initialBalance) // constructor
-            : base(initialBalance)
+        public override void Withdraw(decimal amount)
         {
-        }
-
-        public void DeductMonthlyFee() // method to deduct monthly fee
-        {
-            Withdraw(fee); // withdraw the fee from the balance
+            if (GetBalance() - amount < 0) // Must keep at least 0 in account which means you cant go into debt.
+            {
+                Console.WriteLine("Cannot withdraw, minimum balance must remain 0, You cant go into debt my man!."); // Message if you try to withdraw more than you have.
+            }
+            else
+            {
+                base.Withdraw(amount); // Reuse parent’s withdraw logic
+            }
         }
     }
-
 }
+
+
