@@ -15,21 +15,28 @@ namespace BankWithOOP.Classes
             balance = initialBalance;
         }
 
-        public void Deposit(decimal amount) // Method to deposit money into the account.
+        public virtual void Deposit(decimal amount) // Method to deposit money into the account.
         {
             if (amount > 0)
                 balance += amount;
         }
 
-        public void Withdraw(decimal amount)
+        public virtual void Withdraw(decimal amount)
         {
-            if (amount > 0 && amount <= balance) // Check if there are sufficient funds before withdrawing. (I learnt that && means AND in a more code kinda way).
+            if (balance >= amount) // Check if there are sufficient funds before withdrawing. (Simple way off establishing if you are broke).
+            {
                 balance -= amount;
+                Console.WriteLine($"Withdrawn {amount}, new balance:");
+            }
+            else
+            {
+                Console.WriteLine("Insufficient funds!");
+            }
         }
 
-        public decimal GetBalance() // Method to get the current balance of the account.
-        {
-            return balance;
-        }
+        public decimal GetBalance() => balance; // Method to get the current balance and we use expression-bodied member syntax here because it is smoother and cleaner.
+
+        protected void UpdateBalance(decimal newBalance) => balance = newBalance; // Protected method to update the balance, accessible in derived classes (Children of this class).
+
     }
 }

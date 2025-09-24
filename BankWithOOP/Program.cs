@@ -24,9 +24,10 @@ namespace BankWithOOP
             Console.WriteLine("This is your SavingsAccount money!");
             Console.WriteLine("-----------------------------------");
 
-            var checking = new CheckingAccount(10000m); // start with 10,000
-            checking.DeductMonthlyFee();              // fee of 15 is taken because of the method we created in the CheckingAccount class and having the account costs money.
-            Console.WriteLine(checking.GetBalance()); // prints 9985 because of the fee.
+            var checking = new CheckingAccount(100m); // start with 100
+            checking.DeductMonthlyFee();// fee of 15 is taken because of the method we created in the CheckingAccount class and having the account costs money.
+            checking.Withdraw(600); // This should be allowed because of the overdraft limit of -500 we set in the CheckingAccount class.
+            Console.WriteLine(checking.GetBalance()); // prints 85 because of the fee.
             Console.WriteLine("This is your CheckingAccount money!");
             Console.WriteLine("-----------------------------------");
             Console.ReadLine(); // This is to keep the console window open until we press a key.
